@@ -15,7 +15,7 @@ describe("TaskItem component", () => {
     const task = { text: "Test task"}
 
     render(
-      <TaskItem task={task} q />
+      <TaskItem task={task} />
     )
 
     const taskElement = screen.getByText(/Test task/i)
