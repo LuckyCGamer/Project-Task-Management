@@ -1,6 +1,3 @@
-import { useState } from "react"
-import { useTaskOperations } from "./context/TaskContext"
-
 export default function TaskItem({ task, className, style }) {
   
   const priorityColors = {

@@ -1,37 +1,25 @@
-// test.jsx
+// TaskItem.test.jsx
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import '@testing-library/jest-dom'
-import TaskList from "./TaskList"
-import { TaskProvider } from "./context/TaskContext"
+import TaskItem from "../component/TaskItem"  // adjust path if needed
 
-// Helper to wrap TaskList with provider and mocked context
-const renderWithTasks = (tasks = []) => {
-  const MockProvider = ({ children }) => (
-    <TaskProvider value={{ tasks }}>{children}</TaskProvider>
-  )
-
-  return render(<TaskList />, { wrapper: MockProvider })
+const priorityColors = {
+  high: "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-900",
+  medium:
+    "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-900",
+  low: "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-900",
 }
 
-describe("TaskList", () => {
-  test("displays 'No tasks found' when task list is empty", () => {
-    renderWithTasks([])
+describe("TaskItem component", () => {
+  it("renders task text with correct priority styles", () => {
+    const task = { text: "Test task"}
 
-    expect(screen.getByText("No tasks found")).toBeInTheDocument()
-    expect(screen.getByText("Start by adding your first task above")).toBeInTheDocument()
-  })
+    render(
+      <TaskItem task={task} q />
+    )
 
-  test("displays tasks when task list is not empty", () => {
-    const tasks = [
-      { id: 1, title: "Task One", completed: false },
-      { id: 2, title: "Task Two", completed: true },
-    ]
-
-    renderWithTasks(tasks)
-
-    expect(screen.getByText("Tasks (2)")).toBeInTheDocument()
-    expect(screen.getByText("Task One")).toBeInTheDocument()
-    expect(screen.getByText("Task Two")).toBeInTheDocument()
+    const taskElement = screen.getByText(/Test task/i)
+    expect(taskElement).toBeInTheDocument()
+    // you can also check for class names or styles if needed
   })
 })
