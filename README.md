@@ -45,7 +45,7 @@ This project was developed over **1 week** using XP practices:
 |----|------------|-------------|----------|
 | 1  | As a user, I want to quickly create a task by entering only a title so that I can capture my ideas immediately. | 2 | High |
 | 2  | As a user, I want to view a list of all tasks so that I can see what I need to do. | 2 | High |
-| 3  | As a user, I want to see tasks sorted by priority so that I can focus on important ones first. | 3 | High |
+| 3  | As a user, I want to see tasks sorted by status so that I can focus on important ones first. | 3 | High |
 | 4  | As a user, I want to click on a task to view or add more details (description and status) so that I can enrich it later. | 3 | High |
 | 5  | As a user, I want to delete tasks so that I can remove tasks I no longer need. | 2 | Medium |
 | 6  | As a user, I want my tasks to be saved persistently so that I don’t lose them when I refresh. | 5 | High |
