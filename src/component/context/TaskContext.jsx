@@ -1,5 +1,3 @@
-"use client"
-
 import { createContext, useContext, useReducer, useMemo, useCallback } from "react"
 
 // Create context
@@ -16,7 +14,6 @@ function tasksReducer(tasks, action) {
           text: action.text,
           completed: false,
           createdAt: new Date().toISOString(),
-          priority: action.priority || "medium",
         },
         ...tasks,
       ]
@@ -47,7 +44,7 @@ function tasksReducer(tasks, action) {
 
 // Initial tasks
 const initialTasks = [
-  
+
 ]
 
 // Provider component
@@ -79,4 +76,20 @@ export function useTasksDispatch() {
     throw new Error("useTasksDispatch must be used within a TaskProvider")
   }
   return context
+}
+
+// Custom hook for task operations
+export function useTaskOperations() {
+  const dispatch = useTasksDispatch()
+
+  const addTask = useCallback(
+    (text,) => {
+      dispatch({ type: "added", text })
+    },
+    [dispatch],
+  )
+
+  return {
+    addTask,
+  }
 }
