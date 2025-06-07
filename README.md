@@ -1,12 +1,70 @@
-# React + Vite
+# 📝 Task Management Web Application (XP-Based)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight task management web application inspired by **Trello**, built using **React** and developed with the **Extreme Programming (XP)** methodology.  
+This app allows users to create, view, edit, delete, filter, and sort tasks with real-time validation and persistent storage.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✅ Add, edit, and delete tasks
+- ✅ View task list with sorting by priority
+- ✅ Add detailed descriptions and update task status
+- ✅ Filter tasks by status (To-do, In-progress, Done)
+- ✅ Persistent storage (e.g. localStorage)
+- ✅ Real-time form validation for task title
+- ✅ Responsive and clean UI
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🧑‍💻 Team Roles (XP Style)
+
+| Name              | Role                |
+|-------------------|---------------------|
+| Eric Chandra      | Developer           |
+| Dhaifan Al Ghani  | Customer (Product Owner) |
+| Ariel Fadjar      | XP Coach            |
+
+---
+
+## 🗓️ Development Approach: Extreme Programming (XP)
+
+This project was developed over **1 week** using XP practices:
+
+- **Pair Programming**
+- **Test-Driven Development (TDD)**
+- **Continuous Integration (CI)**
+- **Refactoring**
+- **Planning Game** for user stories
+
+---
+
+## 🗃️ User Stories
+
+| No | User Story | Story Point | Priority |
+|----|------------|-------------|----------|
+| 1  | As a user, I want to quickly create a task by entering only a title so that I can capture my ideas immediately. | 2 | High |
+| 2  | As a user, I want to view a list of all tasks so that I can see what I need to do. | 2 | High |
+| 3  | As a user, I want to see tasks sorted by priority so that I can focus on important ones first. | 3 | High |
+| 4  | As a user, I want to click on a task to view or add more details (description and status) so that I can enrich it later. | 3 | High |
+| 5  | As a user, I want to delete tasks so that I can remove tasks I no longer need. | 2 | Medium |
+| 6  | As a user, I want my tasks to be saved persistently so that I don’t lose them when I refresh. | 5 | High |
+| 7  | As a user, I want to see validation errors if I try to create a task without a title. | 2 | Medium |
+| 8  | As a user, I want to filter tasks by status so that I can track my workflow easily. | 3 | Medium |
+
+---
+
+## 📦 Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/LuckyCGamer/Project-Task-Management.git
+
+# Navigate into the project
+cd Project-Task-Management
+
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
