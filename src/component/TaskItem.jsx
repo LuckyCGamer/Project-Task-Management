@@ -9,16 +9,22 @@ export default function TaskItem({ task, className, style }) {
 
   return (
     <div
-      className={`group flex items-center space-x-4 p-4 rounded-lg border border-border hover:border-input hover:shadow-sm transition-all duration-200 bg-card ${className}`}
+      className={`group flex items-center space-x-4 p-4 rounded-lg border border-border hover:border-input hover:shadow-sm transition-all duration-200 bg-card cursor-pointer ${className}`}
       style={style}
     >
-
       <div className="flex-1 min-w-0">
           <div>
             <p className={`text-sm font-medium transition-all duration-200 `}>
               {task.text}
             </p>
           </div>
+
+          <div className="mt-1 flex items-center space-x-2">
+            <p className={`text-sm font-medium transition-all duration-200 `}>
+              Status : Pending
+            </p>           
+          </div>
+          
         
       </div>
     </div>

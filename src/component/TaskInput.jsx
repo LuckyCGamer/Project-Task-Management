@@ -33,7 +33,6 @@ export default function TaskInput() {
 
           <div className="flex items-center justify-between">
             <div>
-
             </div>
 
             <button type="submit" disabled={!text.trim()} className="btn-primary px-6 py-2">
