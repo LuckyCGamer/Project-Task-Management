@@ -1,15 +1,15 @@
 import { useState } from "react"
+import { useTaskOperations } from "./context/TaskContext"
 
 export default function TaskInput() {
   const [text, setText] = useState("")
+  const { addTask } = useTaskOperations()
 
   // Using React 19's automatic batching for state updates
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (text.trim()) {
-
+      addTask(text)
       setText("")
-    }
   }
 
   return (
