@@ -21,11 +21,9 @@ export default function TaskItem({ task, className, style }) {
 
           <div className="mt-1 flex items-center space-x-2">
             <p className={`text-sm font-medium transition-all duration-200 `}>
-              Status : Pending
+              Status : {task.status}
             </p>           
           </div>
-          
-        
       </div>
     </div>
   )
