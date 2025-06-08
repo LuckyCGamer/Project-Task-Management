@@ -2,12 +2,13 @@ import { useState, useRef, useEffect } from "react"
 import { useTaskOperations } from "./context/TaskContext"
 
 export default function TaskItem({ task, className, style }) {
-  const { updateTask, deleteTask } = useTaskOperations()
+  const { updateTask, deleteTask, toggleTaskCompletion } = useTaskOperations()
   const [editing, setEditing] = useState(false)
   const [text, setText] = useState(task.text)
   const [description, setDescription] = useState(task.description || "")
   const [status, setStatus] = useState(task.status || "To Do")
   const [priority, setPriority] = useState(task.priority || "Low")
+  const [checked, setChecked] = useState(task.completed || false)
   const cardRef = useRef(null)
 
   const priorityColors = {
@@ -89,16 +90,27 @@ export default function TaskItem({ task, className, style }) {
         ) : (
           <>
             <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium transition-all duration-200">
-                  {task.text}
-                </p>
-                {task.description && (
-                  <p className="text-xs text-gray-500 mt-1">{task.description}</p>
-                )}
-                <span className="text-xs text-muted-foreground block mt-1">
-                  Priority : <span className={`font-medium ${priorityColors[task.priority]}`}>{task.priority || "Low"}</span> | Status : <span className="font-medium">{task.status || "Pending"}</span>
-                </span>
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => setChecked(!checked)}
+                  onClick={e => {e.stopPropagation(); toggleTaskCompletion(task)}}
+                  className="accent-green-500 w-5 h-5 cursor-pointer" // Medium size
+                  style={{ minWidth: "1.25rem", minHeight: "1.25rem" }} // Ensures size in all browsers
+                  title="Mark as done"
+                />
+                <div>
+                  <p className={`text-sm font-medium transition-all duration-200 ${checked ? "line-through text-gray-400" : ""}`}>
+                    {task.text}
+                  </p>
+                  {task.description && (
+                    <p className="text-xs text-gray-500 mt-1">{task.description}</p>
+                  )}
+                  <span className="text-xs text-muted-foreground block mt-1">
+                    Priority : <span className={`font-medium ${priorityColors[task.priority]}`}>{task.priority || "Low"}</span> | Status : <span className="font-medium">{task.status || "Pending"}</span>
+                  </span>
+                </div>
               </div>
               <button
                 onClick={() => deleteTask(task.id)}
