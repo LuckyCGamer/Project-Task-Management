@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 import { useTaskOperations } from "./context/TaskContext"
 
 export default function TaskItem({ task, className, style }) {
-  const { updateTask } = useTaskOperations()
+  const { updateTask, deleteTask } = useTaskOperations()
   const [editing, setEditing] = useState(false)
   const [text, setText] = useState(task.text)
   const [status, setStatus] = useState(task.status || "To Do")
@@ -58,12 +58,32 @@ export default function TaskItem({ task, className, style }) {
           </div>
         ) : (
           <>
-            <p className="text-sm font-medium transition-all duration-200">
-              {task.text}
-            </p>
-            <span className="text-xs text-muted-foreground block mt-1">
-              Status : <span className="font-medium">{task.status || "Pending"}</span>
-            </span>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium transition-all duration-200">
+                  {task.text}
+                </p>
+                <span className="text-xs text-muted-foreground block mt-1">
+                  Status : <span className="font-medium">{task.status || "Pending"}</span>
+                </span>
+              </div>
+              <button
+                onClick={() => deleteTask(task.id)}
+                className="p-1 text-muted-foreground hover:text-destructive rounded cursor-pointer"
+                title="Delete task"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
+                </svg>
+              </button>
+            </div>
+
+
           </>
         )}
       </div>

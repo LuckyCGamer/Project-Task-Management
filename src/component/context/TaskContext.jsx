@@ -117,6 +117,7 @@ export function useTaskOperations() {
     },
     [dispatch],
   )
+
   const updateTask = useCallback(
     (id, updates) => {
       dispatch({ type: "changed", task: { ...updates, id } })
@@ -124,8 +125,16 @@ export function useTaskOperations() {
     [dispatch],
   )
 
+  const deleteTask = useCallback(
+    (id) => {
+      dispatch({ type: "deleted", id })
+    },
+    [dispatch],
+  )
+
   return {
     addTask,
-    updateTask
+    updateTask,
+    deleteTask
   }
 }
