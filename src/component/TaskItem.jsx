@@ -8,6 +8,13 @@ export default function TaskItem({ task, className, style }) {
   const [status, setStatus] = useState(task.status || "To Do")
   const cardRef = useRef(null)
 
+  const priorityColors = {
+    High: "text-red-600 border-red-200 dark:border-red-900",
+    Medium:
+      "text-yellow-500 border-yellow-200 dark:border-yellow-900",
+    Low: "text-green-500 border-green-200 dark:border-green-900",
+  }
+
   // Save changes and close edit mode
   const handleSave = () => {
     updateTask(task.id, { ...task, text, status })
@@ -64,7 +71,7 @@ export default function TaskItem({ task, className, style }) {
                   {task.text}
                 </p>
                 <span className="text-xs text-muted-foreground block mt-1">
-                  Status : <span className="font-medium">{task.status || "Pending"}</span>
+                  Priority : <span className={`font-medium ${priorityColors[task.priority]}`}>{task.priority || "Low"}</span> | Status : <span className="font-medium">{task.status || "Pending"}</span>
                 </span>
               </div>
               <button
@@ -82,8 +89,6 @@ export default function TaskItem({ task, className, style }) {
                 </svg>
               </button>
             </div>
-
-
           </>
         )}
       </div>

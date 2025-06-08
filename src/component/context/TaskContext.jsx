@@ -14,6 +14,7 @@ function tasksReducer(tasks, action) {
           text: action.text,
           status: action.status || "To Do",
           createdAt: new Date().toISOString(),
+          priority: action.priority || "Medium",
         },
         ...tasks,
       ]
@@ -49,30 +50,35 @@ const initialTasks = [
     text: "Learn React 19 features",
     createdAt: new Date(Date.now() - 86400000).toISOString(),
     status: "In Progress",
+    priority: "High",
   },
   {
     id: "2",
     text: "Update project dependencies",
     createdAt: new Date(Date.now() - 172800000).toISOString(),
     status: "Done",
+    priority: "Low",
   },
   {
     id: "3",
     text: "Implement new hooks",
     createdAt: new Date(Date.now() - 259200000).toISOString(),
     status: "To Do",
+    priority: "Medium",
   },
   {
     id: "4",
     text: "Test application performance",
     createdAt: new Date().toISOString(),
     status: "To Do",
+    priority: "High",
   },
   {
     id: "5",
     text: "Deploy to production",
     createdAt: new Date(Date.now() - 345600000).toISOString(),
     status: "To Do",
+    priority: "Low",
   },
 ]
 
@@ -112,8 +118,8 @@ export function useTaskOperations() {
   const dispatch = useTasksDispatch()
 
   const addTask = useCallback(
-    (text, status) => {
-      dispatch({ type: "added", text, status })
+    (text, status, priority) => {
+      dispatch({ type: "added", text, status, priority})
     },
     [dispatch],
   )
