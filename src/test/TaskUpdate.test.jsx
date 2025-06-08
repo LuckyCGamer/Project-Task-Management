@@ -32,7 +32,7 @@ describe("TaskItem component", () => {
 
         // Change status
         const select = screen.getByDisplayValue("Pending")
-        fireEvent.change(select, { target: { value: "Done" } })
-        expect(select.value).toBe("Done")
+        fireEvent.change(select, { target: { value: "In Progress" } })
+        expect(select.value).toBe("In Progress")
     })
 })
