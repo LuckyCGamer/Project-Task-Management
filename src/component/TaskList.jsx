@@ -2,10 +2,17 @@
 import { useTasks, useTaskOperations } from "./context/TaskContext"
 import TaskItem from "./TaskItem"
 
-export default function TaskList() {
+export default function TaskList({ filter }) {
   const tasks = useTasks()
 
-  if (tasks.length === 0) {
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "all") return true
+    if (filter === "pending") return task.status === "Pending"
+    if (filter === "inprogress") return task.status === "In Progress"
+    if (filter === "completed") return task.status === "Completed"
+  })
+
+  if (filteredTasks.length === 0) {
     return (
       <div className="card animate-fade-in mt-5">
         <div className="p-12 text-center">
@@ -33,12 +40,12 @@ export default function TaskList() {
       <div className="card animate-slide-up">
         <div className="card-header">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Tasks ({tasks.length})</h2>
+            <h2 className="text-lg font-semibold">Tasks ({filteredTasks.length})</h2>
           </div>
         </div>
         <div className="card-content">
           <div className="space-y-2">
-            {tasks.map((task, index) => (
+            {filteredTasks.map((task, index) => (
               <TaskItem
                 key={task.id}
                 task={task}
