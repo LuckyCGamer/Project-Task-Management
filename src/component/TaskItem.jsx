@@ -53,7 +53,7 @@ export default function TaskItem({ task, className, style }) {
             >
               <option value="Pending">Pending</option>
               <option value="In Progress">In Progress</option>
-              <option value="Done">Done</option>
+              <option value="Completed">Completed</option>
             </select>
           </div>
         ) : (

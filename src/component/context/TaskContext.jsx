@@ -48,13 +48,13 @@ const initialTasks = [
     id: "1",
     text: "Learn React 19 features",
     createdAt: new Date(Date.now() - 86400000).toISOString(),
-    status: "Pending",
+    status: "In Progress",
   },
   {
     id: "2",
     text: "Update project dependencies",
     createdAt: new Date(Date.now() - 172800000).toISOString(),
-    status: "Pending",
+    status: "Completed",
   },
   {
     id: "3",
