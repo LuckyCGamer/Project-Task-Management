@@ -100,12 +100,14 @@ export default function TaskItem({ task, className, style }) {
                   style={{ minWidth: "1.25rem", minHeight: "1.25rem" }} // Ensures size in all browsers
                   title="Mark as done"
                 />
-                <div>
+                <div className="min-w-0">
                   <p className={`text-sm font-medium transition-all duration-200 ${checked ? "line-through text-gray-400" : ""}`}>
                     {task.text}
                   </p>
                   {task.description && (
-                    <p className="text-xs text-gray-500 mt-1">{task.description}</p>
+                    <p className="text-xs text-gray-500 mt-1 break-all">
+                      {task.description}
+                    </p>
                   )}
                   <span className="text-xs text-muted-foreground block mt-1">
                     Priority : <span className={`font-medium ${priorityColors[task.priority]}`}>{task.priority || "Low"}</span> | Status : <span className="font-medium">{task.status || "Pending"}</span>
