@@ -51,6 +51,7 @@ const initialTasks = [
     createdAt: new Date(Date.now() - 86400000).toISOString(),
     status: "In Progress",
     priority: "High",
+    completed: false,
   },
   {
     id: "2",
@@ -58,6 +59,7 @@ const initialTasks = [
     createdAt: new Date(Date.now() - 172800000).toISOString(),
     status: "Done",
     priority: "Low",
+    completed: false,
   },
   {
     id: "3",
@@ -65,6 +67,7 @@ const initialTasks = [
     createdAt: new Date(Date.now() - 259200000).toISOString(),
     status: "To Do",
     priority: "Medium",
+    completed: true,
   },
   {
     id: "4",
@@ -72,6 +75,7 @@ const initialTasks = [
     createdAt: new Date().toISOString(),
     status: "To Do",
     priority: "High",
+    completed: false,
   },
   {
     id: "5",
@@ -79,6 +83,7 @@ const initialTasks = [
     createdAt: new Date(Date.now() - 345600000).toISOString(),
     status: "To Do",
     priority: "Low",
+    completed: false,
   },
 ]
 
@@ -138,9 +143,20 @@ export function useTaskOperations() {
     [dispatch],
   )
 
+  const toggleTaskCompletion = useCallback(
+    (task) => {
+      dispatch({
+        type: "changed",
+        task: { ...task, completed: !task.completed },
+      })
+    },
+    [dispatch],
+  )
+
   return {
     addTask,
     updateTask,
-    deleteTask
+    deleteTask,
+    toggleTaskCompletion
   }
 }
