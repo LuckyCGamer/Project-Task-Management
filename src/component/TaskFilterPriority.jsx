@@ -1,20 +1,9 @@
-import { useTasks } from "./context/TaskContext"
-
 export default function TaskFilters({ filter, onFilterChange }) {
-  const tasks = useTasks()
-
-  const counts = {
-    all: tasks.length,
-    todo: tasks.filter((t) => t.priority == "Low").length,
-    inprogress: tasks.filter((t) => t.priority == "Medium").length,
-    done: tasks.filter((t) => t.priority == "High").length,
-  }
 
   const filters = [
-    { key: "all", label: "All" },
-    { key: "low", label: "Low" },
-    { key: "medium", label: "Medium"},
-    { key: "high", label: "High" },
+    { key: "all", label: "Created At" },
+    { key: "high_low", label: "High-Low" },
+    { key: "low_high", label: "Low-High"},
   ]
 
   return (
@@ -30,7 +19,6 @@ export default function TaskFilters({ filter, onFilterChange }) {
           }`}
         >
           {label}
-          <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-background/20">{counts[key]}</span>
         </button>
       ))}
     </div>
