@@ -7,9 +7,9 @@ export default function TaskList({ filter }) {
   console.log(tasks)
   const filteredTasks = tasks.filter((task) => {
     if (filter === "all") return true
-    if (filter === "pending") return task.status === "Pending"
+    if (filter === "todo") return task.status === "To Do"
     if (filter === "inprogress") return task.status === "In Progress"
-    if (filter === "completed") return task.status === "Completed"
+    if (filter === "done") return task.status === "Done"
   })
 
   if (filteredTasks.length === 0) {

@@ -5,16 +5,16 @@ export default function TaskFilters({ filter, onFilterChange }) {
 
   const counts = {
     all: tasks.length,
-    pending: tasks.filter((t) => t.status == "Pending").length,
+    todo: tasks.filter((t) => t.status == "To Do").length,
     inprogress: tasks.filter((t) => t.status == "In Progress").length,
-    completed: tasks.filter((t) => t.status == "Completed").length,
+    done: tasks.filter((t) => t.status == "Done").length,
   }
 
   const filters = [
     { key: "all", label: "All" },
-    { key: "pending", label: "Pending" },
+    { key: "todo", label: "To Do" },
     { key: "inprogress", label: "In Progress"},
-    { key: "completed", label: "Completed" },
+    { key: "done", label: "Done" },
   ]
 
   return (

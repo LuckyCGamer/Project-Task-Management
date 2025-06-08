@@ -5,7 +5,7 @@ export default function TaskItem({ task, className, style }) {
   const { updateTask } = useTaskOperations()
   const [editing, setEditing] = useState(false)
   const [text, setText] = useState(task.text)
-  const [status, setStatus] = useState(task.status || "Pending")
+  const [status, setStatus] = useState(task.status || "To Do")
   const cardRef = useRef(null)
 
   // Save changes and close edit mode
@@ -51,9 +51,9 @@ export default function TaskItem({ task, className, style }) {
               value={status}
               onChange={e => setStatus(e.target.value)}
             >
-              <option value="Pending">Pending</option>
+              <option value="Pending">To Do</option>
               <option value="In Progress">In Progress</option>
-              <option value="Completed">Completed</option>
+              <option value="Completed">Done</option>
             </select>
           </div>
         ) : (
@@ -62,7 +62,7 @@ export default function TaskItem({ task, className, style }) {
               {task.text}
             </p>
             <span className="text-xs text-muted-foreground block mt-1">
-              Status: <span className="font-medium">{task.status || "Pending"}</span>
+              Status : <span className="font-medium">{task.status || "Pending"}</span>
             </span>
           </>
         )}

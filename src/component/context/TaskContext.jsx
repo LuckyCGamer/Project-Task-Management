@@ -12,7 +12,7 @@ function tasksReducer(tasks, action) {
         {
           id: crypto.randomUUID(),
           text: action.text,
-          status: action.status || "Pending",
+          status: action.status || "To Do",
           createdAt: new Date().toISOString(),
         },
         ...tasks,
@@ -54,25 +54,25 @@ const initialTasks = [
     id: "2",
     text: "Update project dependencies",
     createdAt: new Date(Date.now() - 172800000).toISOString(),
-    status: "Completed",
+    status: "Done",
   },
   {
     id: "3",
     text: "Implement new hooks",
     createdAt: new Date(Date.now() - 259200000).toISOString(),
-    status: "Pending",
+    status: "To Do",
   },
   {
     id: "4",
     text: "Test application performance",
     createdAt: new Date().toISOString(),
-    status: "Pending",
+    status: "To Do",
   },
   {
     id: "5",
     text: "Deploy to production",
     createdAt: new Date(Date.now() - 345600000).toISOString(),
-    status: "Pending",
+    status: "To Do",
   },
 ]
 

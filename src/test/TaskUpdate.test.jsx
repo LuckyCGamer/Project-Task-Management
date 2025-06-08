@@ -8,7 +8,7 @@ function TaskItemWithContext() {
             id: "1",
             text: "Learn React 19 features",
             createdAt: new Date(Date.now() - 86400000).toISOString(),
-            status: "Pending",
+            status: "To Do",
         },
     ]
     return tasks.length ? <TaskItem task={tasks[0]} /> : null
@@ -31,7 +31,7 @@ describe("TaskItem component", () => {
         expect(input.value).toBe("Updated Task")
 
         // Change status
-        const select = screen.getByDisplayValue("Pending")
+        const select = screen.getByDisplayValue("To Do")
         fireEvent.change(select, { target: { value: "In Progress" } })
         expect(select.value).toBe("In Progress")
     })
