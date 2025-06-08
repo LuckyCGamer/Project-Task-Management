@@ -44,7 +44,36 @@ function tasksReducer(tasks, action) {
 
 // Initial tasks
 const initialTasks = [
-
+  {
+    id: "1",
+    text: "Learn React 19 features",
+    createdAt: new Date(Date.now() - 86400000).toISOString(),
+    status: "Pending",
+  },
+  {
+    id: "2",
+    text: "Update project dependencies",
+    createdAt: new Date(Date.now() - 172800000).toISOString(),
+    status: "Pending",
+  },
+  {
+    id: "3",
+    text: "Implement new hooks",
+    createdAt: new Date(Date.now() - 259200000).toISOString(),
+    status: "Pending",
+  },
+  {
+    id: "4",
+    text: "Test application performance",
+    createdAt: new Date().toISOString(),
+    status: "Pending",
+  },
+  {
+    id: "5",
+    text: "Deploy to production",
+    createdAt: new Date(Date.now() - 345600000).toISOString(),
+    status: "Pending",
+  },
 ]
 
 // Provider component
@@ -88,8 +117,15 @@ export function useTaskOperations() {
     },
     [dispatch],
   )
+  const updateTask = useCallback(
+    (id, updates) => {
+      dispatch({ type: "changed", task: { ...updates, id } })
+    },
+    [dispatch],
+  )
 
   return {
     addTask,
+    updateTask
   }
 }
