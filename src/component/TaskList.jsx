@@ -4,7 +4,7 @@ import TaskItem from "./TaskItem"
 
 export default function TaskList({ filter }) {
   const tasks = useTasks()
-
+  console.log(tasks)
   const filteredTasks = tasks.filter((task) => {
     if (filter === "all") return true
     if (filter === "pending") return task.status === "Pending"

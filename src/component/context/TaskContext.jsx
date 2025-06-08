@@ -12,7 +12,7 @@ function tasksReducer(tasks, action) {
         {
           id: crypto.randomUUID(),
           text: action.text,
-          completed: false,
+          status: action.status || "Pending",
           createdAt: new Date().toISOString(),
         },
         ...tasks,
@@ -112,8 +112,8 @@ export function useTaskOperations() {
   const dispatch = useTasksDispatch()
 
   const addTask = useCallback(
-    (text,) => {
-      dispatch({ type: "added", text })
+    (text, status) => {
+      dispatch({ type: "added", text, status })
     },
     [dispatch],
   )
