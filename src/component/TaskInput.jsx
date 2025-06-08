@@ -9,7 +9,7 @@ export default function TaskInput() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!text.trim()) return // Prevent adding empty tasks
-      addTask(text, "Pending")
+      addTask(text, "To Do")
       setText("")
   }
 
