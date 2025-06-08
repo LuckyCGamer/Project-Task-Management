@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useMemo, useCallback } from "react"
+import { createContext, useContext, useReducer, useMemo, useCallback, useEffect } from "react"
 
 // Create context
 const TasksContext = createContext(null)
@@ -45,51 +45,26 @@ function tasksReducer(tasks, action) {
 
 // Initial tasks
 const initialTasks = [
-  {
-    id: "1",
-    text: "Learn React 19 features",
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
-    status: "In Progress",
-    priority: "High",
-    completed: false,
-  },
-  {
-    id: "2",
-    text: "Update project dependencies",
-    createdAt: new Date(Date.now() - 172800000).toISOString(),
-    status: "Done",
-    priority: "Low",
-    completed: false,
-  },
-  {
-    id: "3",
-    text: "Implement new hooks",
-    createdAt: new Date(Date.now() - 259200000).toISOString(),
-    status: "To Do",
-    priority: "Medium",
-    completed: true,
-  },
-  {
-    id: "4",
-    text: "Test application performance",
-    createdAt: new Date().toISOString(),
-    status: "To Do",
-    priority: "High",
-    completed: false,
-  },
-  {
-    id: "5",
-    text: "Deploy to production",
-    createdAt: new Date(Date.now() - 345600000).toISOString(),
-    status: "To Do",
-    priority: "Low",
-    completed: false,
-  },
+
 ]
+
+// Helper to load tasks from localStorage
+function loadTasks() {
+  try {
+    const data = localStorage.getItem("tasks")
+    if (data) return JSON.parse(data)
+  } catch {}
+  return initialTasks
+}
 
 // Provider component
 export function TaskProvider({ children }) {
-  const [tasks, dispatch] = useReducer(tasksReducer, initialTasks)
+  const [tasks, dispatch] = useReducer(tasksReducer, [], loadTasks)
+
+  // Save tasks to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+  }, [tasks])
 
   // Memoize the context value to prevent unnecessary re-renders
   const tasksValue = useMemo(() => tasks, [tasks])
