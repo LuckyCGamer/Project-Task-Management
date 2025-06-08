@@ -50,7 +50,6 @@ This project was developed over **1 week** using XP practices:
 | 5  | As a user, I want to delete tasks so that I can remove tasks I no longer need. | 2 | Medium |
 | 6  | As a user, I want my tasks to be saved persistently so that I don’t lose them when I refresh. | 5 | High |
 | 7  | 	As a user, I want to mark a task as done so that I can clearly indicate completed work. | 2 | Medium |
-| 8  | As a user, I want to filter tasks by status so that I can track my workflow easily. | 3 | Medium |
 
 ---
 
