@@ -2,15 +2,41 @@
 import { useTasks, useTaskOperations } from "./context/TaskContext"
 import TaskItem from "./TaskItem"
 
-export default function TaskList({ filter }) {
+export default function TaskList({ filter, sortPriority }) {
   const tasks = useTasks()
-  console.log(tasks)
+  
   const filteredTasks = tasks.filter((task) => {
     if (filter === "all") return true
     if (filter === "todo") return task.status === "To Do"
     if (filter === "inprogress") return task.status === "In Progress"
     if (filter === "done") return task.status === "Done"
   })
+
+  // Sort by priority
+
+  const sortByPriority = () => {
+    const priorityOrder = {
+      High: 1,
+      Medium: 2,
+      Low: 3,
+    }
+    if(sortPriority === "high_low") {
+      const sortedTasksHighLow = [...filteredTasks].sort((a, b) => {
+        return priorityOrder[a.priority] - priorityOrder[b.priority]
+      })     
+      return sortedTasksHighLow
+    }
+    else if (sortPriority === "low_high") {
+      const sortedTasksLowHigh = [...filteredTasks].sort((a, b) => {
+        return priorityOrder[b.priority] - priorityOrder[a.priority]
+      })     
+      return sortedTasksLowHigh
+    }
+    else {
+      return filteredTasks
+    }
+  }
+
 
   if (filteredTasks.length === 0) {
     return (
@@ -45,7 +71,7 @@ export default function TaskList({ filter }) {
         </div>
         <div className="card-content">
           <div className="space-y-2">
-            {filteredTasks.map((task, index) => (
+            {sortByPriority().map((task, index) => (
               <TaskItem
                 key={task.id}
                 task={task}
