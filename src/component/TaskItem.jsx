@@ -5,19 +5,26 @@ export default function TaskItem({ task, className, style }) {
   const { updateTask, deleteTask } = useTaskOperations()
   const [editing, setEditing] = useState(false)
   const [text, setText] = useState(task.text)
+  const [description, setDescription] = useState(task.description || "")
   const [status, setStatus] = useState(task.status || "To Do")
+  const [priority, setPriority] = useState(task.priority || "Low")
   const cardRef = useRef(null)
 
   const priorityColors = {
     High: "text-red-600 border-red-200 dark:border-red-900",
-    Medium:
-      "text-yellow-500 border-yellow-200 dark:border-yellow-900",
+    Medium: "text-yellow-500 border-yellow-200 dark:border-yellow-900",
     Low: "text-green-500 border-green-200 dark:border-green-900",
   }
 
   // Save changes and close edit mode
   const handleSave = () => {
-    updateTask(task.id, { ...task, text, status })
+    updateTask(task.id, { 
+      ...task, 
+      text, 
+      description, 
+      status, 
+      priority 
+    })
     setEditing(false)
   }
   // Listen for clicks outside the card
@@ -34,7 +41,7 @@ export default function TaskItem({ task, className, style }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [editing, text, status]) // dependencies
+  }, [editing, text, description, status, priority]) // dependencies
 
   return (
     <div
@@ -53,6 +60,13 @@ export default function TaskItem({ task, className, style }) {
               autoFocus
               placeholder="Task name"
             />
+            <textarea
+              className="input"
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+              placeholder="Description"
+              rows={2}
+            />
             <select
               className="input"
               value={status}
@@ -62,6 +76,15 @@ export default function TaskItem({ task, className, style }) {
               <option value="In Progress">In Progress</option>
               <option value="Completed">Done</option>
             </select>
+            <select
+              className="input"
+              value={priority}
+              onChange={e => setPriority(e.target.value)}
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
           </div>
         ) : (
           <>
@@ -70,6 +93,9 @@ export default function TaskItem({ task, className, style }) {
                 <p className="text-sm font-medium transition-all duration-200">
                   {task.text}
                 </p>
+                {task.description && (
+                  <p className="text-xs text-gray-500 mt-1">{task.description}</p>
+                )}
                 <span className="text-xs text-muted-foreground block mt-1">
                   Priority : <span className={`font-medium ${priorityColors[task.priority]}`}>{task.priority || "Low"}</span> | Status : <span className="font-medium">{task.status || "Pending"}</span>
                 </span>
