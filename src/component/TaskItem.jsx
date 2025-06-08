@@ -1,29 +1,71 @@
+import { useState, useRef, useEffect } from "react"
+import { useTaskOperations } from "./context/TaskContext"
+
 export default function TaskItem({ task, className, style }) {
-  
-  const priorityColors = {
-    high: "bg-red-100 text-red-800 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-900",
-    medium:
-      "bg-yellow-100 text-yellow-800 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-900",
-    low: "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/30 dark:text-green-300 dark:border-green-900",
+  const { updateTask } = useTaskOperations()
+  const [editing, setEditing] = useState(false)
+  const [text, setText] = useState(task.text)
+  const [status, setStatus] = useState(task.status || "Pending")
+  const cardRef = useRef(null)
+
+  // Save changes and close edit mode
+  const handleSave = () => {
+    updateTask(task.id, { ...task, text, status })
+    setEditing(false)
   }
+  // Listen for clicks outside the card
+  useEffect(() => {
+    if (!editing) return
+
+    const handleClickOutside = (event) => {
+      if (cardRef.current && !cardRef.current.contains(event.target)) {
+        handleSave()
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [editing, text, status]) // dependencies
 
   return (
     <div
+      ref={cardRef}
       className={`group flex items-center space-x-4 p-4 rounded-lg border border-border hover:border-input hover:shadow-sm transition-all duration-200 bg-card cursor-pointer ${className}`}
       style={style}
+      onClick={() => setEditing(true)}
     >
       <div className="flex-1 min-w-0">
-          <div>
-            <p className={`text-sm font-medium transition-all duration-200 `}>
+        {editing ? (
+          <div className="flex flex-col gap-2" onClick={e => e.stopPropagation()}>
+            <input
+              className="input"
+              value={text}
+              onChange={e => setText(e.target.value)}
+              autoFocus
+              placeholder="Task name"
+            />
+            <select
+              className="input"
+              value={status}
+              onChange={e => setStatus(e.target.value)}
+            >
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Done">Done</option>
+            </select>
+          </div>
+        ) : (
+          <>
+            <p className="text-sm font-medium transition-all duration-200">
               {task.text}
             </p>
-          </div>
-
-          <div className="mt-1 flex items-center space-x-2">
-            <p className={`text-sm font-medium transition-all duration-200 `}>
-              Status : {task.status}
-            </p>           
-          </div>
+            <span className="text-xs text-muted-foreground block mt-1">
+              Status: <span className="font-medium">{task.status || "Pending"}</span>
+            </span>
+          </>
+        )}
       </div>
     </div>
   )

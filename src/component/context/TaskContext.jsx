@@ -117,8 +117,15 @@ export function useTaskOperations() {
     },
     [dispatch],
   )
+  const updateTask = useCallback(
+    (id, updates) => {
+      dispatch({ type: "changed", task: { ...updates, id } })
+    },
+    [dispatch],
+  )
 
   return {
     addTask,
+    updateTask
   }
 }
