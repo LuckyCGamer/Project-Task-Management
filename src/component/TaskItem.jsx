@@ -72,9 +72,9 @@ export default function TaskItem({ task, className, style }) {
               value={status}
               onChange={e => setStatus(e.target.value)}
             >
-              <option value="Pending">To Do</option>
+              <option value="To Do">To Do</option>
               <option value="In Progress">In Progress</option>
-              <option value="Completed">Done</option>
+              <option value="Done">Done</option>
             </select>
             <select
               className="input"
