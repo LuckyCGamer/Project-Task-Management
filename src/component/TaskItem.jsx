@@ -101,7 +101,7 @@ export default function TaskItem({ task, className, style }) {
                   title="Mark as done"
                 />
                 <div className="min-w-0">
-                  <p className={`text-sm font-medium transition-all duration-200 ${checked ? "line-through text-gray-400" : ""}`}>
+                  <p className={`text-sm font-medium break-all transition-all duration-200 ${checked ? "line-through text-gray-400" : ""}`}>
                     {task.text}
                   </p>
                   {task.description && (
