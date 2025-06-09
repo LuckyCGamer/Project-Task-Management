@@ -77,15 +77,25 @@ export default function TaskItem({ task, className, style }) {
               <option value="In Progress">In Progress</option>
               <option value="Done">Done</option>
             </select>
-            <select
-              className="input"
-              value={priority}
-              onChange={e => setPriority(e.target.value)}
-            >
-              <option value="High">High</option>
-              <option value="Medium">Medium</option>
-              <option value="Low">Low</option>
-            </select>
+            <div className="relative">
+              <select
+                className="input px-6"
+                value={priority}
+                onChange={e => setPriority(e.target.value)}
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+                {/* Colored dot indicator */}
+                <span className={`
+                  absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full
+                  ${priority === "Low" ? "bg-green-400" : ""}
+                  ${priority === "Medium" ? "bg-yellow-400" : ""}
+                  ${priority === "High" ? "bg-red-400" : ""}
+                  border border-white shadow
+                `}></span>
+            </div>
           </div>
         ) : (
           <>

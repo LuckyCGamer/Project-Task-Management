@@ -75,7 +75,7 @@ export default function TaskInput() {
               </div>
             </div>
 
-            <button type="submit" disabled={!text.trim()} className="btn-primary px-6 py-2 flex items-center">
+            <button type="submit" disabled={!text.trim()} className="btn-primary px-6 py-2 flex items-center cursor-pointer">
               <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
